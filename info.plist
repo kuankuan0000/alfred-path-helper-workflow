@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>dev.kuankuan</string>
+	<key>category</key>
+	<string>Tools</string>
+	<key>connections</key>
+	<dict>
+		<key>376A1546-945C-4638-B733-1E6BDDCBEBCB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>51B578BB-D0FD-474D-816B-92D167562FC4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>4BEE852F-E43B-4CFF-A2CE-63C4832B3415</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>376A1546-945C-4638-B733-1E6BDDCBEBCB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>51B578BB-D0FD-474D-816B-92D167562FC4</key>
+		<array/>
+	</dict>
+	<key>createdby</key>
+	<string>kuankuan</string>
+	<key>description</key>
+	<string>Path Helper is designed for quick access to detailed file information. With a simple hotkey, it displays and allows copying of a file's absolute path, full name, base name, extension, and directory path directly in Alfred.</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Path Helper v1.0.0</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>path</string>
+				<key>subtext</key>
+				<string>Easily copy information about the currently selected file</string>
+				<key>text</key>
+				<string>Path Helper</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>4BEE852F-E43B-4CFF-A2CE-63C4832B3415</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>51B578BB-D0FD-474D-816B-92D167562FC4</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>parsing...</string>
+				<key>script</key>
+				<string>filepath="$(osascript -e 'tell application "Finder" to get the POSIX path of (the selection as alias)')"
+filename=$(basename "$filepath")
+dirname=$(dirname "$filepath")
+basename=${filename%.*}
+extension=${filename##*.}
+
+echo '{
+  "items": [
+    { "title": "[Full path]\t\t'"$filepath"'", "arg": "'$filepath'" },
+    { "title": "[File name]\t'"$filename"'", "arg": "'$filename'" },
+    { "title": "[Base name]\t'"$basename"'", "arg": "'$basename'" },
+    { "title": "[Extension]\t'"$extension"'", "arg": "'$extension'" },
+    { "title": "[Directory]\t'"$dirname"'", "arg": "'$dirname'" }
+  ]
+}'</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>run.sh</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>376A1546-945C-4638-B733-1E6BDDCBEBCB</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>376A1546-945C-4638-B733-1E6BDDCBEBCB</key>
+		<dict>
+			<key>xpos</key>
+			<real>445</real>
+			<key>ypos</key>
+			<real>175</real>
+		</dict>
+		<key>4BEE852F-E43B-4CFF-A2CE-63C4832B3415</key>
+		<dict>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>175</real>
+		</dict>
+		<key>51B578BB-D0FD-474D-816B-92D167562FC4</key>
+		<dict>
+			<key>xpos</key>
+			<real>655</real>
+			<key>ypos</key>
+			<real>175</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.0.0</string>
+	<key>webaddress</key>
+	<string>https://github.com/kuankuan0000/alfred-path-helper-workflow</string>
+</dict>
+</plist>
